@@ -26,7 +26,7 @@ public class Sets {
 		String currentLine;
 		FileReader reader;
 		Scanner scan;
-		
+		int tempInt;
 		try{
 			//load the file and create the canner
 			reader = new FileReader(filename);
@@ -35,26 +35,30 @@ public class Sets {
 			//get Universal set and number of subsets
 			sizeUniSet = scan.nextInt();
 			numSubsets = scan.nextInt();
-			scan.nextLine();
 			
 			//create the universal set
-			
+			for(int i = 1; i <= sizeUniSet; i++) universalSet.add(i);
 			
 			//keep going if there is another line with another set
 			while(scan.hasNextLine()){
+				scan.nextLine();
 				currentLine = scan.nextLine();
-				System.out.println("currentLine is: " + currentLine);
 				
 				//parse the line with a space as the delimiter
 				String[] temp= currentLine.split(" ");
-				int[] values = new int[temp.length];
 				
+				//get the values from the line
+				int[] values = new int[temp.length];
 				for(int i = 0; i < values.length; i++){
 					values[i] = Integer.parseInt(temp[i]);
 				}
-				System.out.println(values[0]);
-				//scan.nextLine();
-				weights.add(scan.nextInt());
+				
+				//place values into subsetsList
+				subsetsList.add(values);
+				
+				//add weight
+				tempInt = scan.nextInt();
+				weightsList.add(tempInt);
 			}
 		}
 		
@@ -64,6 +68,18 @@ public class Sets {
 	}
 	
 	public void checkSets(){
-		System.out.println("Universal set is: ");
+		System.out.println("Universal set is: " + universalSet.toString());
+		System.out.println("subsets are: ");
+		for(int i = 0; i < subsetsList.size(); i++){
+			System.out.println("weight for current subset is: " + weightsList.get(i));
+			for(int j = 0; j < subsetsList.get(i).length; j++){
+				System.out.print(subsetsList.get(i)[j] + " ");
+				if(universalSet.contains(subsetsList.get(i)[j]) == false){
+					System.out.println();
+					System.out.println("******* " + subsetsList.get(i)[j] + " not found it the universal set! **********" );
+				}
+			}
+			System.out.println();
+		}
 	}
 }
