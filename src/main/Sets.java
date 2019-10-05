@@ -22,7 +22,6 @@ public class Sets {
 	}
 	
 	public void createSets(String filename){
-
 		String currentLine;
 		FileReader reader;
 		Scanner scan;
