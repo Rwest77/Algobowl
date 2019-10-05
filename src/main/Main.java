@@ -6,6 +6,7 @@ public class Main {
 		CreateSets sets = new CreateSets();
 		sets.createSets("Input File");
 		sets.verifier();
+		System.out.println();
 	}
 
 }
