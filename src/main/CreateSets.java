@@ -72,20 +72,20 @@ public class CreateSets {
 	
 	public void verifier(){
 		
-//		//check if each subset contains integers from the universal set
-//		System.out.println("Universal set is: " + universalSet.toString());
-//		System.out.println("subsets are: ");
-//		for(int i = 0; i < subsetsList.size(); i++){
-//			System.out.println("weight for current subset is: " + weightsList.get(i));
-//			for(int j = 0; j < subsetsList.get(i).length; j++){
-//				System.out.print(subsetsList.get(i)[j] + " ");
-//				if(universalSet.contains(subsetsList.get(i)[j]) == false){
-//					System.out.println();
-//					System.out.println("******* " + subsetsList.get(i)[j] + " not found it the universal set! **********" );
-//				}
-//			}
-//			System.out.println();
-//		}
+		//check if each subset contains integers from the universal set
+		System.out.println("Universal set is: " + universalSet.toString());
+		System.out.println("subsets are: ");
+		for(int i = 0; i < subsetsList.size(); i++){
+			System.out.println("weight for current subset is: " + weightsList.get(i));
+			for(int j = 0; j < subsetsList.get(i).length; j++){
+				System.out.print(subsetsList.get(i)[j] + " ");
+				if(universalSet.contains(subsetsList.get(i)[j]) == false){
+					System.out.println();
+					System.out.println("******* " + subsetsList.get(i)[j] + " not found it the universal set! **********" );
+				}
+			}
+			System.out.println();
+		}
 	}
 	
 	public void displaySubsets(){

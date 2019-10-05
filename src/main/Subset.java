@@ -13,7 +13,7 @@ public class Subset{
 		this.subsetNum = subsetNum;
 	}
 
-	@Override
+	
 	public String toString() {
 		return "Subset [subsetNum=" + subsetNum + ", weight=" + weight + ", subset=" + subset + "]";
 	}
