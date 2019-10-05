@@ -7,15 +7,16 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
-public class Sets {
+public class CreateSets {
 	int sizeUniSet;
 	int numSubsets;
+	int subsetsWeight;
 	
 	Set<Integer> universalSet;
 	ArrayList<int[]> subsetsList;
 	ArrayList<Integer> weightsList;
 
-	public Sets(){
+	public CreateSets(){
 		subsetsList = new ArrayList<int[]>();
 		weightsList = new ArrayList<Integer>();
 		universalSet = new HashSet<Integer>();
@@ -66,7 +67,9 @@ public class Sets {
 		}
 	}
 	
-	public void checkSets(){
+	public void verifier(){
+		
+		//check if each subset contains integers from the universal set
 		System.out.println("Universal set is: " + universalSet.toString());
 		System.out.println("subsets are: ");
 		for(int i = 0; i < subsetsList.size(); i++){
@@ -79,6 +82,9 @@ public class Sets {
 				}
 			}
 			System.out.println();
+			
+			
+		
 		}
 	}
 }
