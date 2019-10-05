@@ -7,6 +7,7 @@ public class Main {
 		sets.createSets("Input File");
 		sets.verifier();
 		System.out.println();
+		System.out.println();
 		sets.displaySubsets();
 	}
 
