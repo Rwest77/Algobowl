@@ -86,6 +86,8 @@ public class CreateSets {
 			}
 			System.out.println();
 		}
+		
+		
 	}
 	
 	public void displaySubsets(){
