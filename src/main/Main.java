@@ -9,6 +9,8 @@ public class Main {
 		System.out.println();
 		System.out.println();
 		sets.displaySubsets();
+		Algorithm algo = new Algorithm(sets.getSizeUniSet(), sets.getSubsetsList());
+		algo.doAlgorithm();
 	}
 
 }

@@ -14,11 +14,9 @@ public class CreateSets {
 	
 	Set<Integer> universalSet;
 	ArrayList<Subset> subsetsList;
-	ArrayList<Integer> weightsList;
 
 	public CreateSets(){
 		subsetsList = new ArrayList<Subset>();
-		weightsList = new ArrayList<Integer>();
 		universalSet = new HashSet<Integer>();
 	}
 	
@@ -98,10 +96,14 @@ public class CreateSets {
 			System.out.println();
 		}
 		
-		if(elementMissing != 0){
-			System.out.println(elementMissing + " not found in the universal set!!");
-		}
+		//check that the number of subsets specified in the input file match the number of subsets made
+		if(numSubsets != subsetsList.size()) System.out.println("Number of subsets specified in the input file does not match "
+					+ "the number of subsets made");
 		
+		//check if there are elements in subsets that aren't in the universal set
+		if(elementMissing != 0) System.out.println(elementMissing + " not found in the universal set!!");
+		
+		//check if there are elements in the universal set that are not in any subset
 		if(universalSetCopy.size() != 0){
 			System.out.println("Not all elements found in the subsets");
 			System.out.println("Elements not found in the subsets that are in the univeral set are: "
@@ -110,8 +112,51 @@ public class CreateSets {
 	}
 	
 	public void displaySubsets(){
-		for(Subset i : subsetsList){
-			System.out.println(i.toString());
-		}
+		for(Subset i : subsetsList) System.out.println(i.toString());
+		
 	}
+
+	
+	//setters and getters
+	public int getSizeUniSet() {
+		return sizeUniSet;
+	}
+
+	public void setSizeUniSet(int sizeUniSet) {
+		this.sizeUniSet = sizeUniSet;
+	}
+
+	public int getNumSubsets() {
+		return numSubsets;
+	}
+
+	public void setNumSubsets(int numSubsets) {
+		this.numSubsets = numSubsets;
+	}
+
+	public int getSubsetsWeight() {
+		return subsetsWeight;
+	}
+
+	public void setSubsetsWeight(int subsetsWeight) {
+		this.subsetsWeight = subsetsWeight;
+	}
+
+	public Set<Integer> getUniversalSet() {
+		return universalSet;
+	}
+
+	public void setUniversalSet(Set<Integer> universalSet) {
+		this.universalSet = universalSet;
+	}
+
+	public ArrayList<Subset> getSubsetsList() {
+		return subsetsList;
+	}
+
+	public void setSubsetsList(ArrayList<Subset> subsetsList) {
+		this.subsetsList = subsetsList;
+	}
+	
+	
 }

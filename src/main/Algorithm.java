@@ -15,7 +15,7 @@ public class Algorithm {
 	ArrayList<Integer> elementsUsed;
 	Set<Integer> foundRed;
 	
-	Algorithm(int sizeUniSet) {
+	Algorithm(int sizeUniSet, ArrayList<Subset> subsets) {
 		foundRed = new HashSet<Integer>();
 		elementsUsed = new ArrayList<Integer>();
 		subSetsUsed = new HashSet<Integer>();
@@ -23,27 +23,36 @@ public class Algorithm {
 		for(int i = 1; i <= sizeUniSet; i++) universalSet.add(i);
 		totalWeight = 0;
 		
+		sortSets(subsets);
 	}
 	
-	void sortSets (ArrayList<Subset> arr) { //sort sets by weight/size
+	//sort sets by weight/size
+	void sortSets (ArrayList<Subset> arr) { 
 		sortedSets = new ArrayList<Subset>();
 		Collections.sort(arr);
 		sortedSets = arr;
 	}
 	
 	public void doAlgorithm(){
-		
+		boolean newSubset = false;
 		for(Subset i : sortedSets){
+			newSubset = false;
 			for(int j : i.elements){
 				if(elementsUsed.contains(j) != true){
+					newSubset = true;
 					subSetsUsed.add(i.subsetNum);
 					elementsUsed.add(j);
 				}
 			}
+			if(newSubset == true) totalWeight += i.weight;
 			if(elementsUsed.size() == universalSet.size()){
 				break;
 			}
 		}
+		System.out.println();
+		//output the subsets used and their weights
+		System.out.println("subsets used were: " + subSetsUsed.toString());
+		System.out.println("Total weight was: " + totalWeight);
 	}
 	
 	public void removeRed(){
@@ -55,9 +64,6 @@ public class Algorithm {
 				foundRed.add(elementsUsed.get(i));
 			}
 		}
-		
-		
-		
 	}
 	
 	
