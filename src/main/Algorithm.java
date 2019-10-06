@@ -49,8 +49,9 @@ public class Algorithm {
 				break;
 			}
 		}
-		System.out.println();
+
 		//output the subsets used and their weights
+		System.out.println();
 		System.out.println("subsets used were: " + subSetsUsed.toString());
 		System.out.println("Total weight was: " + totalWeight);
 	}

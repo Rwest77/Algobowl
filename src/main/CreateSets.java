@@ -67,7 +67,8 @@ public class CreateSets {
 		}
 	}
 	
-	public void verifier(){
+	public Boolean verifier(){
+		boolean validInput = true;
 		int elementMissing = 0;
 		Set<Integer> universalSetCopy = new HashSet<Integer>();
 		universalSetCopy.addAll(universalSet);
@@ -97,18 +98,27 @@ public class CreateSets {
 		}
 		
 		//check that the number of subsets specified in the input file match the number of subsets made
-		if(numSubsets != subsetsList.size()) System.out.println("Number of subsets specified in the input file does not match "
-					+ "the number of subsets made");
+		if(numSubsets != subsetsList.size()) {
+			System.out.println("Number of subsets specified in the input file does not match "
+					+ " the number of subsets made");
+			validInput = false;
+		}
+					
 		
 		//check if there are elements in subsets that aren't in the universal set
-		if(elementMissing != 0) System.out.println(elementMissing + " not found in the universal set!!");
+		if(elementMissing != 0) {
+			System.out.println(elementMissing + " not found in the universal set!!");
+			validInput = false;
+		}
 		
 		//check if there are elements in the universal set that are not in any subset
 		if(universalSetCopy.size() != 0){
 			System.out.println("Not all elements found in the subsets");
 			System.out.println("Elements not found in the subsets that are in the univeral set are: "
 					+ universalSetCopy.toString());
+			validInput = false;
 		}
+		return validInput;
 	}
 	
 	public void displaySubsets(){

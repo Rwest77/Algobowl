@@ -5,7 +5,7 @@ public class Main {
 	public static void main(String[] args) {
 		CreateSets sets = new CreateSets();
 		sets.createSets("Input File");
-		sets.verifier();
+		if(sets.verifier() == false) System.exit(0);
 		System.out.println();
 		System.out.println();
 		sets.displaySubsets();
