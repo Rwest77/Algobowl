@@ -27,7 +27,7 @@ public class CreateSets {
 		FileReader reader;
 		Scanner scan;
 		int weight;
-		int subsetNum = 1;
+		int subsetNum = 0;
 		try{
 			//load the file and create the canner
 			reader = new FileReader(filename);
@@ -42,6 +42,7 @@ public class CreateSets {
 			
 			//keep going if there is another line with another set
 			while(scan.hasNextLine()){
+				subsetNum++;
 				scan.nextLine();
 				currentLine = scan.nextLine();
 				
@@ -59,9 +60,7 @@ public class CreateSets {
 				
 				//create the subset
 				Subset subset = new Subset(values, weight, subsetNum);
-				subsetsList.add(subset);
-				System.out.println("subsetsList size is: " + subsetsList.size());
-				
+				subsetsList.add(subset);				
 			}
 		}
 		
@@ -71,23 +70,43 @@ public class CreateSets {
 	}
 	
 	public void verifier(){
+		int elementMissing = 0;
+		Set<Integer> universalSetCopy = new HashSet<Integer>();
+		universalSetCopy.addAll(universalSet);
 		
 		//check if each subset contains integers from the universal set
 		System.out.println("Universal set is: " + universalSet.toString());
 		System.out.println("subsets are: ");
-		for(int i = 0; i < subsetsList.size(); i++){
-			System.out.println("weight for current subset is: " + weightsList.get(i));
-			for(int j = 0; j < subsetsList.get(i).length; j++){
-				System.out.print(subsetsList.get(i)[j] + " ");
-				if(universalSet.contains(subsetsList.get(i)[j]) == false){
+		
+		//Iterate through all subsets
+		for(Subset i : subsetsList){
+			System.out.println();
+			System.out.println("Subset number is: " + i.subsetNum);
+			System.out.println("weight for current subset is: " + i.weight);
+			System.out.print("elements are: ");
+			
+			//Iterate through the elements in the subset
+			for(int j : i.elements){
+				universalSetCopy.remove(j);
+				System.out.print(j + " ");
+				if(universalSet.contains(j) == false){
+					elementMissing = j;
 					System.out.println();
-					System.out.println("******* " + subsetsList.get(i)[j] + " not found it the universal set! **********" );
+					System.out.println("******* " + j + " not found it the universal set! **********" );
 				}
 			}
 			System.out.println();
 		}
 		
+		if(elementMissing != 0){
+			System.out.println(elementMissing + " not found in the universal set!!");
+		}
 		
+		if(universalSetCopy.size() != 0){
+			System.out.println("Not all elements found in the subsets");
+			System.out.println("Elements not found in the subsets that are in the univeral set are: "
+					+ universalSetCopy.toString());
+		}
 	}
 	
 	public void displaySubsets(){
