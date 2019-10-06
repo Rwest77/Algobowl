@@ -1,5 +1,9 @@
 package main;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -7,6 +11,10 @@ import java.util.Set;
 
 public class Algorithm {
 	ArrayList<Subset> sortedSets;
+	
+	FileWriter file = null;
+	BufferedWriter buffer = null;
+	PrintWriter output = null;
 	
 	//these 3 variables will make up the output
 	int totalWeight;
@@ -22,7 +30,6 @@ public class Algorithm {
 		universalSet = new HashSet<Integer>();
 		for(int i = 1; i <= sizeUniSet; i++) universalSet.add(i);
 		totalWeight = 0;
-		
 		sortSets(subsets);
 	}
 	
@@ -66,6 +73,25 @@ public class Algorithm {
 			}
 		}
 	}
+	
+	//generate the output file based on the algorithm
+	public void outputFile(){
+		try{
+			file = new FileWriter("outputFile.txt", false);
+			buffer = new BufferedWriter(file);
+			output = new PrintWriter(buffer);
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
+		
+		output.println(totalWeight);
+		for(int i : subSetsUsed){
+			output.print(i);
+		}
+	}
+	
+	
 	
 	
 }
