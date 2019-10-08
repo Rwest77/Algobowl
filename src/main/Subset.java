@@ -6,23 +6,28 @@ import java.util.ArrayList;
 public class Subset implements Comparable<Subset>{
 	int subsetNum;
 	int weight;
-	int value;
+	double value;
 	ArrayList<Integer> elements;
 	
 	public Subset(ArrayList<Integer> subset, int weight, int subsetNum){
 		this.elements = subset;
 		this.weight = weight;
 		this.subsetNum = subsetNum;
-		value =this.weight/subset.size();
-	}
-
-	public String toString() {
-		return "Subset [subsetNum=" + subsetNum + ", weight=" + weight + ", subset=" + elements + "]";
+		value =(double) (this.weight)/subset.size() *1000;
 	}
 	
 	@Override
+	public String toString() {
+		return "Subset [subsetNum=" + subsetNum + ", weight=" + weight + ", value=" + value + ", elements=" + elements
+				+ "]";
+	}
+
+
+	@Override
 	public int compareTo(Subset o){
-		return value - o.value;
+		int x = (int) (value);
+		int y = (int) (o.value);
+		return (x-y);
 	}
 	
 	

@@ -4,7 +4,9 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class CreateInput {
 	
@@ -20,6 +22,8 @@ public class CreateInput {
 	//weight
 	int weight;
 	
+	int randNum;
+	Set<Integer> usedNums = new HashSet<Integer>();
 	FileWriter file = null;
 	BufferedWriter buffer = null;
 	PrintWriter output = null;
@@ -49,21 +53,32 @@ public class CreateInput {
 		
 		//create m number of sets
 		for(int i = 0; i < numSubsets; i++){
+			usedNums.clear();
 			
 			//create a random number of elements for that set
-			elements = rand.nextInt(899) + 100;
+			elements = rand.nextInt(300) + 2;
+			System.out.println("elements is: " + elements);
 			for(int j = 0; j < elements; j++){
 				
 				//generate a random element
+				randNum = rand.nextInt(uniSetSize) + 1;
+				System.out.println("randNum is: " + randNum);
+				while(usedNums.contains(randNum) == true){
+					System.out.println("in loop");
+					randNum = rand.nextInt(uniSetSize) + 1;
+				}
+				usedNums.add(randNum);
+				
 				//check if this is the last element to put in the set
 				if((j + 1) == elements){
-					output.println(rand.nextInt(uniSetSize) + 1);
+					output.println(randNum);
 					continue;
 				}
 				else{
-					output.print((rand.nextInt(uniSetSize) + 1) + " ");
+					output.print((randNum) + " ");
 				}
 			}
+			
 			//generate weight
 			if(i + 1 == numSubsets){
 				output.print(rand.nextInt(998) + 1);

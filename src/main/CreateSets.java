@@ -27,6 +27,7 @@ public class CreateSets {
 		int weight;
 		int subsetNum = 0;
 		try{
+			
 			//load the file and create the canner
 			reader = new FileReader(filename);
 			scan = new Scanner(reader);
@@ -43,6 +44,7 @@ public class CreateSets {
 				subsetNum++;
 				scan.nextLine();
 				currentLine = scan.nextLine();
+				System.out.println("currentLine is: " + currentLine);
 				
 				//parse the line with a space as the delimiter
 				String[] temp= currentLine.split(" ");
@@ -80,11 +82,10 @@ public class CreateSets {
 		
 		//check if each subset contains integers from the universal set
 		System.out.println("Universal set is: " + universalSet.toString());
-		System.out.println("subsets are: ");
 		
 		//Iterate through all subsets
 		for(Subset i : subsetsList){
-			System.out.println();
+//			System.out.println();
 //			System.out.println("Subset number is: " + i.subsetNum);
 //			System.out.println("weight for current subset is: " + i.weight);
 //			System.out.print("elements are: ");
@@ -99,7 +100,7 @@ public class CreateSets {
 					System.out.println("******* " + j + " not found it the universal set! **********" );
 				}
 			}
-			System.out.println();
+//			System.out.println();
 		}
 		
 		//check that the number of subsets specified in the input file match the number of subsets made
@@ -127,6 +128,7 @@ public class CreateSets {
 	}
 	
 	public void displaySubsets(){
+		System.out.println("Subsets are: ");
 		for(Subset i : subsetsList) System.out.println(i.toString());
 		
 	}

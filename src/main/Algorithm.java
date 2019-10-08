@@ -51,7 +51,10 @@ public class Algorithm {
 					elementsUsed.add(j);
 				}
 			}
-			if(newSubset == true) totalWeight += i.weight;
+			if(newSubset == true){
+				//TODO: add all elements of current subset to new arraylist
+				totalWeight += i.weight;
+			}
 			if(elementsUsed.size() == universalSet.size()){
 				break;
 			}
@@ -65,7 +68,7 @@ public class Algorithm {
 	
 	public void removeRed(){
 		Collections.sort(elementsUsed);
-		System.out.println(elementsUsed.toString());
+		System.out.println("elements used: " + elementsUsed.toString());
 		for(int i = 0; i < elementsUsed.size() - 1; i++){
 			
 			if(elementsUsed.get(i) == elementsUsed.get(i+1)){
@@ -76,6 +79,7 @@ public class Algorithm {
 	
 	//generate the output file based on the algorithm
 	public void outputFile(){
+		
 		try{
 			file = new FileWriter("outputFile.txt", false);
 			buffer = new BufferedWriter(file);
@@ -85,13 +89,12 @@ public class Algorithm {
 			e.printStackTrace();
 		}
 		
-		output.println(totalWeight);
+		output.println(this.totalWeight);
 		for(int i : subSetsUsed){
-			output.print(i);
+			output.print(i + " ");
 		}
+		output.close();
 	}
-	
-	
 	
 	
 }

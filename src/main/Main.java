@@ -5,15 +5,17 @@ import java.io.IOException;
 public class Main {
 	
 	public static void main(String[] args){
-		CreateInput input = new CreateInput();
+//		CreateInput input = new CreateInput();
 		CreateSets sets = new CreateSets();
-		sets.createSets("inputFile.txt");
+		sets.createSets("testFile");
 		if(sets.verifyInput() == false) System.exit(0);
-		System.out.println();
-		System.out.println();
-		//sets.displaySubsets();
+		sets.displaySubsets();
 		Algorithm algo = new Algorithm(sets.getSizeUniSet(), sets.getSubsetsList());
 		algo.doAlgorithm();
+		algo.outputFile();
+		algo.removeRed();
+//		VerifyOutput verify = new VerifyOutput(sets.getSizeUniSet(), sets.getSubsetsList(), "outputFile.txt")
+		
 	}
 
 }
