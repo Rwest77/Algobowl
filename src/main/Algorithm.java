@@ -1,12 +1,15 @@
 package main;
 
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 
 public class Algorithm {
@@ -55,7 +58,7 @@ public class Algorithm {
 				}
 			}
 			if(newSubset == true){
-				//TODO: add all elements of current subset to new arraylist to find all redundancies
+				
 				totalWeight += i.weight;
 				for(int k : i.elements){
 					redundancy.add(k);
@@ -75,14 +78,12 @@ public class Algorithm {
 	public void removeRed(){
 		boolean test = true;
 		Collections.sort(redundancy);
-		System.out.println("redundancy: " + redundancy.toString());
 		for(int i = 0; i < redundancy.size() - 1; i++){
 			
 			if(redundancy.get(i) == redundancy.get(i+1)){
 				foundRed.add(redundancy.get(i));
 			}
 		}
-		System.out.println("foundRed: " + foundRed.toString());
 
 		for(Subset j : sortedSets){
 			if(!subSetsUsed.contains(j.subsetNum)) continue; 
@@ -91,8 +92,6 @@ public class Algorithm {
 			//found subset that is in subSetsUsed, j is the subset
 			for(int k : j.elements){
 				
-				System.out.println("j elements: " + j.elements.toString());
-				System.out.println("k is: " + k);
 				if(foundRed.contains(k) == false){
 					test = false; 
 					//subset j has an element that is not redundant
@@ -106,7 +105,6 @@ public class Algorithm {
 				totalWeight -= j.weight;
 				subSetsUsed.remove(j.subsetNum);
 				for(int k : j.elements){
-					System.out.println("foundRed.indexOf(k) is: " + foundRed.indexOf(k));
 					foundRed.remove(foundRed.indexOf(k));
 				}
 			}
@@ -135,5 +133,61 @@ public class Algorithm {
 		output.close();
 	}
 	
+	//verify that the sets in the output contain all the elements in the universal set
+	//also check that the weight of the subsets add up to the correct weight
+	public void verifyOutput(){
+		FileReader reader;
+		Scanner scan;
+		Set<Integer> elements = new HashSet<Integer>();
+		ArrayList<Integer> subsets = new ArrayList<Integer>();
+		
+		try{
+			reader = new FileReader("outputFile.txt");
+			scan = new Scanner(reader);
+			int testWeight = 0;
+			int weight = 0;
+			weight = scan.nextInt();
+			scan.nextLine();
+			String[] temp= scan.nextLine().split(" ");
+			for(int i = 0; i < temp.length; i++){
+				subsets.add(Integer.parseInt(temp[i]));
+			}
+
+			
+			//get subsets that were used
+			for(int i : subsets){
+				
+				//iterate through all the subsets to see if subsetNum matches i
+				for(Subset j : sortedSets){
+					
+					//found subset that was used in the output
+					if (j.subsetNum == i){
+						
+						//add the elements of the subset to 'elements'
+						for(int k : j.elements){
+							elements.add(k);
+						}
+						testWeight += j.weight;
+					}
+				}
+			}
+			
+			if(elements.size() == universalSet.size()){
+				System.out.println("elements from the output subsets match the universalSet");
+			}
+			if(weight == testWeight){
+				System.out.println("weight from output matches predicted weight");
+			}
+			scan.close();
+
+		}
+		catch (FileNotFoundException e){
+			System.out.println("File not found");
+			e.printStackTrace();
+
+		}
+		
+
+	}
 	
 }

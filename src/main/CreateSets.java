@@ -44,7 +44,6 @@ public class CreateSets {
 				subsetNum++;
 				scan.nextLine();
 				currentLine = scan.nextLine();
-				System.out.println("currentLine is: " + currentLine);
 				
 				//parse the line with a space as the delimiter
 				String[] temp= currentLine.split(" ");
