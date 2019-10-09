@@ -21,10 +21,13 @@ public class Algorithm {
 	Set<Integer> subSetsUsed;
 	Set<Integer> universalSet;
 	ArrayList<Integer> elementsUsed;
-	Set<Integer> foundRed;
+	ArrayList<Integer> foundRed;
+	ArrayList<Integer> redundancy;
+	//ArrayList<Subset> subsets;
 	
 	Algorithm(int sizeUniSet, ArrayList<Subset> subsets) {
-		foundRed = new HashSet<Integer>();
+		foundRed = new ArrayList<Integer>();
+		redundancy = new ArrayList<Integer>();
 		elementsUsed = new ArrayList<Integer>();
 		subSetsUsed = new HashSet<Integer>();
 		universalSet = new HashSet<Integer>();
@@ -52,8 +55,11 @@ public class Algorithm {
 				}
 			}
 			if(newSubset == true){
-				//TODO: add all elements of current subset to new arraylist
+				//TODO: add all elements of current subset to new arraylist to find all redundancies
 				totalWeight += i.weight;
+				for(int k : i.elements){
+					redundancy.add(k);
+				}
 			}
 			if(elementsUsed.size() == universalSet.size()){
 				break;
@@ -61,20 +67,53 @@ public class Algorithm {
 		}
 
 		//output the subsets used and their weights
-		System.out.println();
+		System.out.println("redundancy is: " + redundancy.toString());
 		System.out.println("subsets used were: " + subSetsUsed.toString());
 		System.out.println("Total weight was: " + totalWeight);
 	}
 	
 	public void removeRed(){
-		Collections.sort(elementsUsed);
-		System.out.println("elements used: " + elementsUsed.toString());
-		for(int i = 0; i < elementsUsed.size() - 1; i++){
+		boolean test = true;
+		Collections.sort(redundancy);
+		System.out.println("redundancy: " + redundancy.toString());
+		for(int i = 0; i < redundancy.size() - 1; i++){
 			
-			if(elementsUsed.get(i) == elementsUsed.get(i+1)){
-				foundRed.add(elementsUsed.get(i));
+			if(redundancy.get(i) == redundancy.get(i+1)){
+				foundRed.add(redundancy.get(i));
 			}
 		}
+		System.out.println("foundRed: " + foundRed.toString());
+
+		for(Subset j : sortedSets){
+			if(!subSetsUsed.contains(j.subsetNum)) continue; 
+			test = true;
+
+			//found subset that is in subSetsUsed, j is the subset
+			for(int k : j.elements){
+				
+				System.out.println("j elements: " + j.elements.toString());
+				System.out.println("k is: " + k);
+				if(foundRed.contains(k) == false){
+					test = false; 
+					//subset j has an element that is not redundant
+					break;
+				}
+			}
+			
+			//j has an element
+			if(test == true){
+				System.out.println("removed redundancy: " + j.subsetNum);
+				totalWeight -= j.weight;
+				subSetsUsed.remove(j.subsetNum);
+				for(int k : j.elements){
+					System.out.println("foundRed.indexOf(k) is: " + foundRed.indexOf(k));
+					foundRed.remove(foundRed.indexOf(k));
+				}
+			}
+		}
+		System.out.println("new subSetsUsed is: " + subSetsUsed);
+		System.out.println("new weight is: " + totalWeight);
+		System.out.println("redundancy is: " + foundRed.toString());
 	}
 	
 	//generate the output file based on the algorithm
