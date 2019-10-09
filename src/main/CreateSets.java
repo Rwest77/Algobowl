@@ -80,7 +80,7 @@ public class CreateSets {
 		universalSetCopy.addAll(universalSet);
 		
 		//check if each subset contains integers from the universal set
-		System.out.println("Universal set is: " + universalSet.toString());
+		System.out.println("Universal set of the input file is: " + universalSet.size());
 		
 		//Iterate through all subsets
 		for(Subset i : subsetsList){

@@ -70,7 +70,8 @@ public class Algorithm {
 		}
 
 		//output the subsets used and their weights
-		System.out.println("redundancy is: " + redundancy.toString());
+		System.out.println();
+		System.out.println("Algorithm has completed.");
 		System.out.println("subsets used were: " + subSetsUsed.toString());
 		System.out.println("Total weight was: " + totalWeight);
 	}
@@ -109,9 +110,10 @@ public class Algorithm {
 				}
 			}
 		}
+		System.out.println();
+		System.out.println("After removing redundancy: ");
 		System.out.println("new subSetsUsed is: " + subSetsUsed);
 		System.out.println("new weight is: " + totalWeight);
-		System.out.println("redundancy is: " + foundRed.toString());
 	}
 	
 	//generate the output file based on the algorithm
@@ -172,6 +174,7 @@ public class Algorithm {
 				}
 			}
 			
+			System.out.println();
 			if(elements.size() == universalSet.size()){
 				System.out.println("elements from the output subsets match the universalSet");
 			}

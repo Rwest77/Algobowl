@@ -7,7 +7,7 @@ public class Main {
 	public static void main(String[] args){
 //		CreateInput input = new CreateInput();
 		CreateSets sets = new CreateSets();
-		sets.createSets("testFile");
+		sets.createSets("input_group113.txt");
 		if(sets.verifyInput() == false) System.exit(0);
 		//sets.displaySubsets();
 		Algorithm algo = new Algorithm(sets.getSizeUniSet(), sets.getSubsetsList());
